@@ -1,0 +1,27 @@
+#!name = 墨鱼去开屏2.0
+#!desc = 去除开屏广告，部分APP要清除缓存或者重新安装拦截广告才会生效!
+#!author = ddgksf2013[https://github.com/ddgksf2013]
+#!tag = 去广告
+#!icon = https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/Other-Icon/AdReject.png
+#!date = 2025-11-24 10:00
+
+[Rule]
+DOMAIN-SUFFIX,shenshiads.com,REJECT
+DOMAIN-SUFFIX,yfanads.com,REJECT
+DOMAIN-SUFFIX,msmp.abchina.com.cn,REJECT
+# 更多规则...
+
+[Rewrite]
+^https?:\/\/2025.11.24/c401/v2.0.627 reject-200
+^https:\/\/proxy\.guodongbaohe\.com\/app\/getWidget\?cat=taobao&key=start%5Fpop%5Fwindow&timestamp= reject-200
+^https:\/\/proxy\.guodongbaohe\.com\/app\/getWidget\?cat=other&key=mine%5Fpop%5Fwindow&timestamp= reject-200
+^https?:\/\/app\.58\.com\/api\/home\/(advertising|appadv) reject-200
+# 更多规则...
+
+[Script]
+http-response ^https?:\/\/[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){1,4}(:\d+)?\/api\/v\d\/movie\/index_recommend script-path = https://raw.githubusercontent.com/ddgksf2013/Scripts/master/555Ad.js, requires-body = true, tag = [墨鱼去开屏2.0]555 DianYing
+http-response ^https?:\/\/ad\.12306\.cn\/ad\/ser\/getAdList script-path = https://raw.githubusercontent.com/ddgksf2013/Scripts/master/12306.js, requires-body = true, tag = [墨鱼去开屏2.0]TieLu 12306
+# 更多脚本...
+
+[MitM]
+hostname = p0.pipi.cn, 203.107.1.97, m.mynj.cn, idaily-cdn.idailycdn.com, vod.pipi.cn, icity-pres.2q10.com, gw.xiaocantech.com, ...
