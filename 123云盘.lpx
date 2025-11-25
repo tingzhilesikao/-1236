@@ -1,0 +1,51 @@
+{
+  "name": "123云盘",
+  "description": "过滤123云盘应用端及网页端广告，解除网页端流量1G下载限制（单文件下载）。",
+  "author": "可莉🅥, ddgksf2013",
+  "icon": "https://raw.githubusercontent.com/sooyaaabo/Loon/main/Icon/App-Icon/123Pan-01.png",
+  "version": "2025.10.16",
+  "homepage": "https://github.com/sooyaaabo/Loon/blob/main/README.md",
+  "rules": [
+    {
+      "type": "rewrite",
+      "match": "^https://www\\.123pan\\.com/api/config/get",
+      "action": "reject-dict"
+    },
+    {
+      "type": "rewrite",
+      "match": "^https://proxy\\.guodongbaohe\\.com/app/getWidget\\?cat",
+      "action": "reject-200"
+    },
+    {
+      "type": "rewrite",
+      "match": "^https://proxy\\.guodongbaohe\\.com/app/getWidget\\?cat=other&key=mine_pop_window&timestamp=",
+      "action": "reject-200"
+    },
+    {
+      "type": "rewrite",
+      "match": "^https://proxy\\.guodongbaohe\\.com/app/getWidget\\?cat=taobao&key=start_pop_window&timestamp=",
+      "action": "reject-200"
+    },
+    {
+      "type": "script",
+      "script_type": "http-response",
+      "match": "^https?://www\\.123pan\\.com/s/[0-9a-zA-Z=_/-]+\\.html",
+      "script_url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/123pan.js",
+      "requires_body": true,
+      "timeout": 60,
+      "tag": "[123云盘]移除广告"
+    },
+    {
+      "type": "script",
+      "script_type": "http-request",
+      "match": "^https?://www\\.123pan\\.com/b/api/share/download/info",
+      "script_url": "https://raw.githubusercontent.com/ddgksf2013/Scripts/master/123pan.js",
+      "timeout": 60,
+      "tag": "[123云盘]解除下载限制"
+    }
+  ],
+  "mitm": [
+    "www.123pan.com",
+    "proxy.guodongbaohe.com"
+  ]
+}
